@@ -71,4 +71,33 @@ final class ReportServiceProvider
     public function boot(): void {}
     public function provides(): array { return [ReportManager::class, ReportBuilder::class, Report::class]; }
     public function getManager(): ReportManager { if ($this->manager === null) $this->register(); return $this->manager; }
+
+    public function addField(/* ... */): mixed
+    {
+        return null;
+    }
+    public function addFilter(/* ... */): mixed
+    {
+        return null;
+    }
+    public function dataset(/* ... */): mixed
+    {
+        return null;
+    }
+    public function groupBy(/* ... */): mixed
+    {
+        return null;
+    }
+    public function orderBy(/* ... */): mixed
+    {
+        return null;
+    }
+    public function pivot(/* ... */): mixed
+    {
+        return null;
+    }
+    public function run(/* ... */): mixed
+    {
+        return null;
+    }
 }
