@@ -6,27 +6,27 @@ namespace Tavaan\Engine\Report;
 
 final class ReportExporter
 {
-    public function csv(/* ... */): mixed
+    public function csv()
     {
         return null;
     }
-    public function xlsx(/* ... */): mixed
+    public function xlsx()
     {
         return null;
     }
-    public function html(/* ... */): mixed
+    public function html()
     {
         return null;
     }
-    public function json(/* ... */): mixed
+    public function json(?string $key = null, mixed $default = null): string
     {
         $d = json_decode($this->getContent(), true); return $key === null ? $d : ($d[$key] ?? $default);
     }
-    public function pdf(/* ... */): mixed
+    public function pdf()
     {
         return null;
     }
-    public function stream(/* ... */): mixed
+    public function stream()
     {
         return null;
     }

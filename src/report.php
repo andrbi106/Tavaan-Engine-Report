@@ -74,31 +74,31 @@ final class ReportServiceProvider
     public function provides(): array { return [ReportManager::class, ReportBuilder::class, Report::class]; }
     public function getManager(): ReportManager { if ($this->manager === null) $this->register(); return $this->manager; }
 
-    public function addField(/* ... */): mixed
-    {
-        return $this;
-    }
-    public function addFilter(/* ... */): mixed
-    {
-        return $this;
-    }
-    public function dataset(/* ... */): mixed
+    public function addField()
     {
         return null;
     }
-    public function groupBy(/* ... */): mixed
-    {
-        return $this;
-    }
-    public function orderBy(/* ... */): mixed
-    {
-        return $this;
-    }
-    public function pivot(/* ... */): mixed
+    public function addFilter()
     {
         return null;
     }
-    public function run(/* ... */): mixed
+    public function dataset()
+    {
+        return null;
+    }
+    public function groupBy(string $column): self
+    {
+        return $this;
+    }
+    public function orderBy(string $column, string $direction = "ASC"): self
+    {
+        return $this;
+    }
+    public function pivot()
+    {
+        return null;
+    }
+    public function run()
     {
         return null;
     }
