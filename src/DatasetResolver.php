@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tavaan\Engine\Report;
 
-use Tavaan\Core\Contracts\Database\QueryBuilderInterface;
+use Tavaan\Engine\Database\Contracts\QueryBuilderInterface;
 use Tavaan\Engine\Database\ConnectionManager;
 use Tavaan\Engine\Report\Exceptions\ReportException;
 
