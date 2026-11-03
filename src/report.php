@@ -74,32 +74,61 @@ final class ReportServiceProvider
     public function provides(): array { return [ReportManager::class, ReportBuilder::class, Report::class]; }
     public function getManager(): ReportManager { if ($this->manager === null) $this->register(); return $this->manager; }
 
-    public function addField()
+    public function addField(string $name, mixed $value): self
     {
-        return null;
+        $this->getManager()->register($name, fn() => $value);
+        return $this;
     }
-    public function addFilter()
+    public function addFilter(string $column, mixed $value): self
     {
-        return null;
+        $this->getManager()->register('filter_' . $column, fn() => $value);
+        return $this;
     }
-    public function dataset()
+    public function dataset(string $name, iterable $rows): self
     {
-        return null;
+        $this->getManager()->register($name, function () use ($rows) {
+            $builder = new ReportBuilder($name);
+            foreach ($rows as $row) {
+                $builder->addRow($row);
+            }
+            return $builder->build();
+        });
+        return $this;
     }
+    private array $reportState = [];
+
     public function groupBy(string $column): self
     {
+        $this->reportState['groupBy'] = $column;
         return $this;
     }
+
     public function orderBy(string $column, string $direction = "ASC"): self
     {
+        $this->reportState['orderBy'] = ['column' => $column, 'direction' => $direction];
         return $this;
     }
-    public function pivot()
+    public function pivot(string $name, array $rows, string $rowKey, string $colKey, string $valueKey): Report
     {
-        return null;
+        $pivot = [];
+        foreach ($rows as $row) {
+            $rk = $row[$rowKey] ?? '';
+            $ck = $row[$colKey] ?? '';
+            $v = $row[$valueKey] ?? 0;
+            $pivot[$rk][$ck] = $v;
+        }
+        $data = [];
+        foreach ($pivot as $rk => $cols) {
+            $row = [$rowKey => $rk];
+            foreach ($cols as $ck => $v) {
+                $row[$ck] = $v;
+            }
+            $data[] = $row;
+        }
+        return new Report($name, ucfirst($name) . ' Pivot', $data);
     }
-    public function run()
+    public function run(string $name, array $params = []): ?Report
     {
-        return null;
+        return $this->getManager()->generate($name, $params);
     }
 }
