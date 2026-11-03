@@ -36,11 +36,13 @@ final class ReportBuilder
         if (empty($this->data)) return '';
         $csv = '';
         $headers = $this->columns ?: array_keys($this->data[0]);
-        $csv .= implode(',', $headers) . "\n";
+        $csv .= implode(',', $headers) . "
+";
         foreach ($this->data as $row) {
             $values = [];
             foreach ($headers as $h) { $values[] = '"' . str_replace('"', '""', (string)($row[$h] ?? '')) . '"'; }
-            $csv .= implode(',', $values) . "\n";
+            $csv .= implode(',', $values) . "
+";
         }
         return $csv;
     }
