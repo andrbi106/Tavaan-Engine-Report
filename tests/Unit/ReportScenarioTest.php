@@ -15,7 +15,7 @@ use Tavaan\Engine\Report\ReportExporter;
  */
 final class ReportScenarioTest extends TestCase
 {
-    public function t01_builder_add_row_and_count(): void
+    public function test_t01_builder_add_row_and_count(): void
     {
         // Scenario T-01
 $b = new ReportBuilder("sales");
@@ -23,7 +23,7 @@ $b = new ReportBuilder("sales");
         $b->addRow(["id" => 2, "amount" => 200]);
         $this->assertSame(2, $b->count());
     }
-    public function t02_builder_to_csv(): void
+    public function test_t02_builder_to_csv(): void
     {
         // Scenario T-02
 $b = new ReportBuilder("sales");
@@ -33,7 +33,7 @@ $b = new ReportBuilder("sales");
         $this->assertStringContainsString("id", $csv);
         $this->assertStringContainsString("100", $csv);
     }
-    public function t03_builder_to_json(): void
+    public function test_t03_builder_to_json(): void
     {
         // Scenario T-03
 $b = new ReportBuilder("sales");
@@ -41,7 +41,7 @@ $b = new ReportBuilder("sales");
         $json = $b->toJson();
         $this->assertStringContainsString("sales", $json);
     }
-    public function t04_exporter_csv_output(): void
+    public function test_t04_exporter_csv_output(): void
     {
         // Scenario T-04
 $b = new ReportBuilder("sales");
@@ -52,7 +52,7 @@ $b = new ReportBuilder("sales");
         $csv = $ex->csv();
         $this->assertStringContainsString("id", $csv);
     }
-    public function t05_exporter_html_output(): void
+    public function test_t05_exporter_html_output(): void
     {
         // Scenario T-05
 $b = new ReportBuilder("sales");
