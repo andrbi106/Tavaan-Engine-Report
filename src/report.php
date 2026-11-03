@@ -76,11 +76,11 @@ final class ReportServiceProvider
 
     public function addField(/* ... */): mixed
     {
-        return null;
+        return $this;
     }
     public function addFilter(/* ... */): mixed
     {
-        return null;
+        return $this;
     }
     public function dataset(/* ... */): mixed
     {
