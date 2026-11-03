@@ -20,7 +20,7 @@ final class ReportExporter
     }
     public function json(/* ... */): mixed
     {
-        return null;
+        $d = json_decode($this->getContent(), true); return $key === null ? $d : ($d[$key] ?? $default);
     }
     public function pdf(/* ... */): mixed
     {

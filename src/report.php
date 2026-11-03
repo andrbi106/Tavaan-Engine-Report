@@ -88,11 +88,11 @@ final class ReportServiceProvider
     }
     public function groupBy(/* ... */): mixed
     {
-        return null;
+        return $this;
     }
     public function orderBy(/* ... */): mixed
     {
-        return null;
+        return $this;
     }
     public function pivot(/* ... */): mixed
     {
