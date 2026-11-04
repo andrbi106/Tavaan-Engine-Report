@@ -38,5 +38,6 @@
     "accessor": "report"
   },
   "docs": "docs/03-engines/report.md",
-  "notes": "M7 — Dataset (Closure/QueryBuilder/SQL/آرایه) + فیلترهای allowlist، Group/Subtotal، Pivot، Aggregate با Decimal (بدون float — ADR-0013)، تاریخ جلالی، خروجی CSV (BOM+delimiter «;»+streaming+🔒 ضد CSV Injection)، xlsx خودنوشته OOXML با ZipWriterPure (بدون PhpSpreadsheet/ext-zip)، HTML با قالب report::table + fallback escaped، JSON، PDF اختیاری، 🔒 sandbox مسیر export و max_rows."
+  "notes": "M7 — Dataset (Closure/QueryBuilder/SQL/آرایه) + فیلترهای allowlist، Group/Subtotal، Pivot، Aggregate با Decimal (بدون float — ADR-0013)، تاریخ جلالی، خروجی CSV (BOM+delimiter «;»+streaming+🔒 ضد CSV Injection)، xlsx خودنوشته OOXML با ZipWriterPure (بدون PhpSpreadsheet/ext-zip)، HTML با قالب report::table + fallback escaped، JSON، PDF اختیاری، 🔒 sandbox مسیر export و max_rows.",
+  "class": "Tavaan\\Engine\\Report\\ReportEngine"
 }

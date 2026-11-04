@@ -2,6 +2,8 @@
 
 > **گزارش‌ساز** — موتور Report در فریمورک تَوان
 
+این موتور از کلاس پایهٔ `Engine` (در [Tavaan-Engine-Core](https://github.com/andrbi106/Tavaan-Engine-Core)) ارث می‌برد.
+
 ## مشخصات
 
 | فیلد | مقدار |
@@ -11,82 +13,66 @@
 | عنوان فارسی | گزارش‌ساز |
 | نسخه | `0.1.0` |
 | namespace | `Tavaan\Engine\Report` |
-| نوع | `engine` |
-| Facade | `Report` (accessor: `report`) |
+| کلاس موتور | `Tavaan\Engine\Report\ReportEngine` |
+| Facade | Report (`report`) |
+
+## کلاس موتور
+
+```php
+namespace Tavaan\Engine\Report;
+
+use Tavaan\EngineCore\Engine as BaseEngine;
+use Tavaan\EngineCore\Contracts\EngineManifestInterface;
+
+final class ReportEngine extends BaseEngine
+{
+    public function __construct(EngineManifestInterface $manifest)
+    {
+        parent::__construct($manifest);
+    }
+
+    public function register(ContainerInterface $container): void
+    {
+        parent::register($container);
+        // bindingهای اختصاصی موتور
+    }
+
+    public function boot(): void
+    {
+        parent::boot();
+    }
+}
+```
+
+**فایل:** `src/ReportEngine.php`
 
 ## توضیحات
 
 M7 — Dataset (Closure/QueryBuilder/SQL/آرایه) + فیلترهای allowlist، Group/Subtotal، Pivot، Aggregate با Decimal (بدون float — ADR-0013)، تاریخ جلالی، خروجی CSV (BOM+delimiter «;»+streaming+🔒 ضد CSV Injection)، xlsx خودنوشته OOXML با ZipWriterPure (بدون PhpSpreadsheet/ext-zip)، HTML با قالب report::table + fallback escaped، JSON، PDF اختیاری، 🔒 sandbox مسیر export و max_rows.
 
-## خطاها (Exceptions)
+## وابستگی‌ها
 
-- `Tavaan\Engine\Report\Exceptions\ReportException`
+**موتورهای مورد‌نیاز:** `config`
 
-## Facadeها
-
-- `Tavaan\Engine\Report\Facades\Report`
-
-## کلاس‌های اصلی
-
-- `src/Aggregator.php`
-- `src/DatasetResolver.php`
-- `src/Export/CsvExporter.php`
-- `src/Export/HtmlExporter.php`
-- `src/Export/JsonExporter.php`
-- `src/Export/PdfExporter.php`
-- `src/Export/XlsxExporter.php`
-- `src/Export/XlsxWriter.php`
-- `src/Field.php`
-- `src/Filter.php`
-- `src/Formatter.php`
-- `src/PivotBuilder.php`
-- `src/PivotConfig.php`
-- `src/ReportExporter.php`
-- `src/ReportResolver.php`
-- `src/ReportResult.php`
-- `src/report.php`
+**موتورهای اختیاری:** `database`, `filesystem`, `view`, `i18n`, `compat`, `http`
 
 ## Service Providerها
 
 - `Tavaan\Engine\Report\ReportBuilderServiceProvider`
 
-## وابستگی‌ها
+## سه درگاه ارتباط با سایر موتورها
 
-**موتورهای مورد‌نیاز:**
-
-- `config`
-
-**موتورهای اختیاری:**
-
-- `database`
-- `filesystem`
-- `view`
-- `i18n`
-- `compat`
-- `http`
-
-## پیکربندی
-
-- فایل پیکربندی: `config/report.php`
-- کلید: `report`
+| درگاه | الگو | متدهای convenience |
+|---|---|---|
+| Container | pull-based DI | `make()`, `bound()` |
+| Events | pub/sub | `dispatch()`, `listen()` |
+| EngineBus | point-to-point RPC | `call()`, `offer()` |
 
 ## نصب
 
 ```bash
 git clone https://github.com/andrbi106/Tavaan-Engine-Report.git
 ```
-
-این موتور بخشی از فریمورک تَوان است و معمولاً به‌صورت مستقیم نصب نمی‌شود،
-بلکه توسط [Tavaan-Core](https://github.com/andrbi106/Tavaan-Core) مدیریت می‌شود.
-
-## روابط با سایر مخازن
-
-| مخزن | نقش |
-|---|---|
-| **`andrbi106/Tavaan-Engine-Report`** (این مخزن) | موتور Report |
-| `andrbi106/Tavaan-Engine-Core` | ساختار پایه + درگاه ارتباط موتورها |
-| `andrbi106/Tavaan-Core` | اسکلت اپلیکیشن + همهٔ موتورها |
-| `Derogaramin/Tavaan-Framework` | فریمورک مادر (monorepo) |
 
 ## مجوز
 
